@@ -205,6 +205,28 @@ footer .in{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;pa
   .track{flex-wrap:wrap;width:auto}.track[aria-hidden]{display:none}
   .lane i{top:30%}
 }
+
+/* expandable roles */
+.job{cursor:pointer;transition:border-color .3s,background .3s}
+.job:hover{border-color:color-mix(in srgb,var(--accent) 40%,var(--line))}
+.job.open{border-color:color-mix(in srgb,var(--accent) 60%,var(--line));background:color-mix(in srgb,var(--accent) 4%,var(--card))}
+.jh{all:unset;box-sizing:border-box;display:flex;justify-content:space-between;align-items:flex-start;gap:16px;width:100%;cursor:pointer;border-radius:8px}
+.jh:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+.jt{display:flex;flex-direction:column;gap:4px;min-width:0}
+.jn{font-size:1.08rem;font-weight:600}
+.jn em{font-style:normal;color:var(--accent)}
+.sum{font-size:.95rem;font-weight:400;color:var(--muted)}
+.chev{flex:none;width:32px;height:32px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;transition:transform .45s cubic-bezier(.2,.8,.2,1),background .3s,border-color .3s}
+.chev::before{content:"";width:8px;height:8px;border-right:2px solid var(--accent);border-bottom:2px solid var(--accent);transform:translateY(-2px) rotate(45deg)}
+.job.open .chev{transform:rotate(180deg);background:color-mix(in srgb,var(--accent) 16%,transparent);border-color:var(--accent)}
+.jd{display:grid;grid-template-rows:0fr;transition:grid-template-rows .55s cubic-bezier(.2,.8,.2,1)}
+.job.open .jd{grid-template-rows:1fr}
+.jd-in{overflow:hidden;min-height:0;cursor:auto}
+.jd ul{margin-top:14px}
+.jd li{opacity:0;transform:translateY(10px);transition:opacity .35s ease,transform .45s cubic-bezier(.2,.8,.2,1);transition-delay:0s}
+.job.open .jd li{opacity:1;transform:none;transition-delay:calc(.12s + var(--i)*70ms)}
+.jd .tags{margin-top:14px;opacity:0;transform:translateY(8px);transition:opacity .35s,transform .45s}
+.job.open .jd .tags{opacity:1;transform:none;transition-delay:.45s}
 </style>
 </head>
 <body>
@@ -324,28 +346,34 @@ footer .in{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;pa
   <div class="sec-head rv">
     <span class="eyebrow">Experience</span>
     <h2>Five years building production software</h2>
-    <p>Full Stack .NET/React work in Agile teams, then my own products.</p>
+    <p>Full Stack .NET/React work in Agile teams, then my own products. Click a role to see the details.</p>
   </div>
   <div class="tl" id="tl">
     <div class="rail"></div><div class="fill" id="fill"></div>
-    <div class="job rv"><div class="when">2026 — now</div><div class="b">
-      <h3>Independent Mobile App Developer · <em>Self-employed</em></h3>
-      <ul><li>Designing, building and publishing my own iOS apps with React Native and Expo</li><li>AI integration, Firebase and Supabase backends, App Store submission and review</li></ul></div></div>
+    <div class="job rv open"><div class="when">2026 — now</div><div class="b">
+      <h3><button class="jh" type="button" aria-expanded="true" aria-controls="jd1"><span class="jt"><span class="jn">Independent Mobile App Developer · <em>Self-employed</em></span><span class="sum">Designing, building and publishing my own iOS apps with React Native and Expo.</span></span><span class="chev" aria-hidden="true"></span></button></h3>
+      <div class="jd" id="jd1"><div class="jd-in"><ul><li style="--i:0">Designed, built and shipped five iOS apps on my own, from idea to App Store release</li><li style="--i:1">Integrated AI features: selfie-based makeup try-on and AI outfit suggestions</li><li style="--i:2">Built backends with Firebase (authentication, database, storage) and Supabase</li><li style="--i:3">Implemented the full UI, navigation and animations with React Native and Expo</li><li style="--i:4">Handled App Store submission, review feedback and version updates</li></ul><div class="tags"><span class="tag">React Native</span><span class="tag">Expo</span><span class="tag">Firebase</span><span class="tag">Supabase</span><span class="tag">AI APIs</span><span class="tag">App Store</span></div></div></div>
+    </div></div>
     <div class="job rv"><div class="when">Dec 2023 — Dec 2024</div><div class="b">
-      <h3>.NET / OutSystems Software Engineer · <em>SQLI</em></h3>
-      <ul><li>Maintained and extended a web platform built with ASP.NET Core and React/TypeScript</li><li>Built features end to end: ASP.NET Core Web API backend and React frontend</li><li>Refactoring, SQL query optimization and .NET version upgrades</li></ul></div></div>
+      <h3><button class="jh" type="button" aria-expanded="false" aria-controls="jd2"><span class="jt"><span class="jn">.NET / OutSystems Software Engineer · <em>SQLI</em></span><span class="sum">Maintained and extended a large web platform built with ASP.NET Core and React.</span></span><span class="chev" aria-hidden="true"></span></button></h3>
+      <div class="jd" id="jd2"><div class="jd-in"><ul><li style="--i:0">Maintained and improved a large web platform, fixing bugs and improving stability and performance</li><li style="--i:1">Developed new features end to end: ASP.NET Core Web API backend and React/TypeScript frontend</li><li style="--i:2">Refactored code, optimized SQL queries and React components, and upgraded .NET versions</li><li style="--i:3">Built reusable components and integrated REST APIs for a maintainable, scalable codebase</li><li style="--i:4">Worked in an Agile/Scrum team: sprint planning, reviews and retrospectives</li></ul><div class="tags"><span class="tag">.NET Core</span><span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">OutSystems</span><span class="tag">SQL Server</span><span class="tag">Scrum</span></div></div></div>
+    </div></div>
     <div class="job rv"><div class="when">Oct 2022 — Oct 2023</div><div class="b">
-      <h3>.NET / React Software Engineer</h3>
-      <ul><li>React/TypeScript interfaces and ASP.NET MVC business features</li><li>High-performance WPF dashboard for real-time data monitoring (MVVM)</li><li>Deployment, monitoring and security on Microsoft Azure</li></ul></div></div>
+      <h3><button class="jh" type="button" aria-expanded="false" aria-controls="jd3"><span class="jt"><span class="jn">.NET / React Software Engineer</span><span class="sum">Built React interfaces, ASP.NET MVC features and a real-time WPF dashboard.</span></span><span class="chev" aria-hidden="true"></span></button></h3>
+      <div class="jd" id="jd3"><div class="jd-in"><ul><li style="--i:0">Developed modern, responsive interfaces with React and TypeScript, integrated with REST APIs</li><li style="--i:1">Evolved business features and application logic with ASP.NET MVC</li><li style="--i:2">Built a high-performance WPF desktop dashboard for real-time data monitoring (MVVM pattern)</li><li style="--i:3">Deployed, monitored and secured applications on Microsoft Azure</li><li style="--i:4">Collaborated in an Agile/Scrum team with Git workflows and code reviews</li></ul><div class="tags"><span class="tag">ASP.NET MVC</span><span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">WPF</span><span class="tag">Azure</span><span class="tag">Git</span></div></div></div>
+    </div></div>
     <div class="job rv"><div class="when">Sep 2020 — Aug 2022</div><div class="b">
-      <h3>CRM / .NET Developer · <em>Stimulsoft</em></h3>
-      <ul><li>ISO certificate management platform for certification and compliance</li><li>React/TypeScript front end, .NET services, Azure Event Hub for real-time data</li></ul></div></div>
+      <h3><button class="jh" type="button" aria-expanded="false" aria-controls="jd4"><span class="jt"><span class="jn">CRM / .NET Developer · <em>Stimulsoft</em></span><span class="sum">Built an ISO certificate management platform with React, .NET and Azure.</span></span><span class="chev" aria-hidden="true"></span></button></h3>
+      <div class="jd" id="jd4"><div class="jd-in"><ul><li style="--i:0">Built and maintained an ISO certificate management platform for certification and compliance</li><li style="--i:1">Developed front-end features with React and TypeScript, and back-end services in .NET</li><li style="--i:2">Used Azure Event Hub for real-time data streaming between services</li><li style="--i:3">Deployed and monitored the application on Azure for availability, scalability and security</li><li style="--i:4">Took part in code reviews and Agile/Scrum delivery</li></ul><div class="tags"><span class="tag">.NET</span><span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">Azure</span><span class="tag">Azure Event Hub</span><span class="tag">Git</span></div></div></div>
+    </div></div>
     <div class="job rv"><div class="when">Feb 2020 — Aug 2020</div><div class="b">
-      <h3>Software Engineering Intern</h3>
-      <ul><li>Test automation application built with ASP.NET and React</li></ul></div></div>
+      <h3><button class="jh" type="button" aria-expanded="false" aria-controls="jd5"><span class="jt"><span class="jn">Software Engineering Intern</span><span class="sum">Final-year engineering project: a test automation application.</span></span><span class="chev" aria-hidden="true"></span></button></h3>
+      <div class="jd" id="jd5"><div class="jd-in"><ul><li style="--i:0">Developed an application to automate software testing</li><li style="--i:1">Built back-end services with ASP.NET and the user interface with React</li><li style="--i:2">Integrated automated validation workflows, reducing testing time and improving coverage</li></ul><div class="tags"><span class="tag">ASP.NET</span><span class="tag">React</span><span class="tag">Test automation</span></div></div></div>
+    </div></div>
     <div class="job rv"><div class="when">Feb 2019 — Aug 2019</div><div class="b">
-      <h3>Freelance Web Developer</h3>
-      <ul><li>Bug fixing on an ASP.NET Core / AngularJS web app</li><li>Digital learning app for young students (Angular, Ionic) for DBM Maroc</li></ul></div></div>
+      <h3><button class="jh" type="button" aria-expanded="false" aria-controls="jd6"><span class="jt"><span class="jn">Freelance Web Developer</span><span class="sum">Web app maintenance and a digital learning app for young students.</span></span><span class="chev" aria-hidden="true"></span></button></h3>
+      <div class="jd" id="jd6"><div class="jd-in"><ul><li style="--i:0">Fixed bugs and stabilized a client&#x27;s web application built with ASP.NET Core and AngularJS</li><li style="--i:1">Co-developed, in a team of two, a digital learning app for young students for DBM Maroc</li><li style="--i:2">Built the learning app with Angular 6, Ionic 4, HTML/CSS and Bootstrap</li></ul><div class="tags"><span class="tag">ASP.NET Core</span><span class="tag">AngularJS</span><span class="tag">Angular</span><span class="tag">Ionic</span><span class="tag">Bootstrap</span></div></div></div>
+    </div></div>
   </div>
 </div></section>
 
@@ -427,6 +455,9 @@ addEventListener('scroll',tlUpdate,{passive:true});addEventListener('resize',tlU
 const links=[...document.querySelectorAll('.links a')];
 const io=new IntersectionObserver(es=>{es.forEach(en=>{if(en.isIntersecting){links.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+en.target.id))}})},{rootMargin:'-45% 0px -50% 0px'});
 ['apps','experience','skills','contact'].forEach(id=>{const s=document.getElementById(id);if(s)io.observe(s)});
+
+/* expandable roles */
+jobs.forEach(j=>{j.addEventListener('click',e=>{if(e.target.closest('.jd-in'))return;const o=j.classList.toggle('open');const b=j.querySelector('.jh');if(b)b.setAttribute('aria-expanded',String(o));const t0=performance.now();(function f(n){tlUpdate();if(n-t0<650)requestAnimationFrame(f)})(t0)})});
 
 /* copy */
 const btn=document.getElementById('copy');
