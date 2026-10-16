@@ -267,6 +267,17 @@ footer .in{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;pa
   .orb-tags{position:static;transform:none;margin-top:8px}
   .orb.on .orb-tags{transform:none}
 }
+
+/* skill hover */
+.panel .tags{margin-top:0}
+.panel{transition:border-color .3s}
+.panel:hover{border-color:color-mix(in srgb,var(--accent) 45%,var(--line))}
+.panel .tag,.cert span{position:relative;overflow:hidden;cursor:default;transition:transform .35s cubic-bezier(.3,1.6,.5,1),border-color .25s,background .25s,color .25s,box-shadow .3s,opacity .25s}
+.panel .tag::after,.cert span::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.35) 50%,transparent 70%);transform:translateX(-120%);transition:transform .6s ease;pointer-events:none}
+.panel .tag:hover{transform:translateY(-4px) scale(1.08);border-color:var(--accent);background:color-mix(in srgb,var(--accent) 20%,var(--bg2));color:#fff;box-shadow:0 10px 22px -8px var(--accent)}
+.cert span:hover{transform:translateY(-4px) scale(1.06);border-color:var(--accent2);background:color-mix(in srgb,var(--accent2) 26%,transparent);color:#fff;box-shadow:0 10px 22px -8px var(--accent2)}
+.panel .tag:hover::after,.cert span:hover::after{transform:translateX(120%)}
+.panel .tags:hover .tag:not(:hover),.cert:hover span:not(:hover){opacity:.5}
 </style>
 </head>
 <body>
