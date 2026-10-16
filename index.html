@@ -227,6 +227,46 @@ footer .in{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;pa
 .job.open .jd li{opacity:1;transform:none;transition-delay:calc(.12s + var(--i)*70ms)}
 .jd .tags{margin-top:14px;opacity:0;transform:translateY(8px);transition:opacity .35s,transform .45s}
 .job.open .jd .tags{opacity:1;transform:none;transition-delay:.45s}
+
+/* orbit view */
+.jd{display:none!important}
+.job.open{border-color:var(--line);background:var(--card)}
+.chev::before{width:12px;height:12px;border:0;transform:none;background:linear-gradient(var(--accent),var(--accent)) center/100% 2px no-repeat,linear-gradient(var(--accent),var(--accent)) center/2px 100% no-repeat}
+.job.open .chev{transform:none;background:transparent;border-color:var(--line)}
+.job:hover .chev{transform:rotate(90deg);border-color:var(--accent);background:color-mix(in srgb,var(--accent) 14%,transparent)}
+.orb{position:fixed;inset:0;z-index:100;display:grid;place-items:center;visibility:hidden;pointer-events:none;padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));transition:visibility 0s .45s}
+.orb.on{visibility:visible;pointer-events:auto;transition:none}
+.orb-bg{position:absolute;inset:0;background:color-mix(in srgb,var(--bg) 84%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);opacity:0;transition:opacity .4s}
+.orb.on .orb-bg{opacity:1}
+.orb-stage{position:relative;width:min(1040px,100%);height:min(780px,100%)}
+.orb-x{position:absolute;top:0;right:0;z-index:5;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--fg);font-size:24px;line-height:1;cursor:pointer;opacity:0;transition:opacity .3s,border-color .2s}
+.orb.on .orb-x{opacity:1;transition-delay:.3s}
+.orb-x:hover{border-color:var(--accent)}
+.orb-lines{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+.orb-lines line{stroke:color-mix(in srgb,var(--accent) 55%,transparent);stroke-width:1.5;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .6s cubic-bezier(.2,.8,.2,1)}
+.orb.on .orb-lines line{stroke-dashoffset:0;transition-delay:calc(.25s + var(--i)*.08s)}
+.orb-core{position:absolute;left:50%;top:50%;width:230px;height:230px;margin:-115px 0 0 -115px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;padding:26px;background:radial-gradient(circle at 30% 25%,color-mix(in srgb,var(--accent) 28%,var(--card)),var(--card) 72%);border:1px solid color-mix(in srgb,var(--accent) 60%,var(--line));box-shadow:0 0 0 10px color-mix(in srgb,var(--accent) 7%,transparent),0 0 80px -12px var(--accent);transform:scale(.2);opacity:0;transition:transform .55s cubic-bezier(.3,1.4,.5,1),opacity .3s;z-index:2}
+.orb.on .orb-core{transform:none;opacity:1}
+.orb-core::before{content:"";position:absolute;inset:-22px;border-radius:50%;border:1px dashed color-mix(in srgb,var(--accent) 45%,transparent);animation:spin 26s linear infinite;pointer-events:none}
+.orb-when{font-family:var(--f-mono);font-size:.72rem;color:var(--muted)}
+.orb-core h3{font-family:var(--f-display);font-weight:600;font-size:1rem;line-height:1.2;letter-spacing:-.01em}
+.orb-co{color:var(--accent);font-weight:600;font-size:.9rem}
+.orb-n{position:absolute;left:50%;top:50%;width:min(240px,26%);transform:translate(-50%,-50%) scale(.4);opacity:0;padding:14px 16px 14px 30px;border-radius:16px;background:var(--card);border:1px solid var(--line);font-size:.9rem;line-height:1.45;color:var(--fg);box-shadow:0 18px 40px -20px rgba(0,0,0,.7);transition:left .7s cubic-bezier(.2,.8,.2,1),top .7s cubic-bezier(.2,.8,.2,1),transform .7s cubic-bezier(.2,.8,.2,1),opacity .4s,border-color .25s;z-index:3}
+.orb-n::before{content:"";position:absolute;left:14px;top:21px;width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent)}
+.orb.on .orb-n{opacity:1;transform:translate(-50%,-50%);transition-delay:calc(.2s + var(--i)*.08s)}
+.orb-n:hover{border-color:var(--accent)}
+.orb-tags{position:absolute;left:50%;bottom:0;transform:translate(-50%,10px);display:flex;flex-wrap:wrap;justify-content:center;gap:6px;width:min(640px,100%);opacity:0;transition:opacity .4s,transform .4s;z-index:3}
+.orb.on .orb-tags{opacity:1;transform:translate(-50%,0);transition-delay:.7s}
+@media (max-width:760px){
+  .orb{place-items:stretch}
+  .orb-stage{height:100%;overflow-y:auto;display:flex;flex-direction:column;align-items:center;gap:12px;padding-block:60px 24px}
+  .orb-lines{display:none}
+  .orb-core{position:relative;left:auto;top:auto;margin:0 0 22px;flex:none;width:200px;height:200px}
+  .orb-n{position:relative;left:auto!important;top:auto!important;width:100%;max-width:440px;transform:translateY(16px);flex:none}
+  .orb.on .orb-n{transform:none}
+  .orb-tags{position:static;transform:none;margin-top:8px}
+  .orb.on .orb-tags{transform:none}
+}
 </style>
 </head>
 <body>
@@ -346,7 +386,7 @@ footer .in{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;pa
   <div class="sec-head rv">
     <span class="eyebrow">Experience</span>
     <h2>Five years building production software</h2>
-    <p>Full Stack .NET/React work in Agile teams, then my own products. Click a role to see the details.</p>
+    <p>Full Stack .NET/React work in Agile teams, then my own products. Click a role to explore everything I did there.</p>
   </div>
   <div class="tl" id="tl">
     <div class="rail"></div><div class="fill" id="fill"></div>
@@ -456,8 +496,22 @@ const links=[...document.querySelectorAll('.links a')];
 const io=new IntersectionObserver(es=>{es.forEach(en=>{if(en.isIntersecting){links.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+en.target.id))}})},{rootMargin:'-45% 0px -50% 0px'});
 ['apps','experience','skills','contact'].forEach(id=>{const s=document.getElementById(id);if(s)io.observe(s)});
 
-/* expandable roles */
-jobs.forEach(j=>{j.addEventListener('click',e=>{if(e.target.closest('.jd-in'))return;const o=j.classList.toggle('open');const b=j.querySelector('.jh');if(b)b.setAttribute('aria-expanded',String(o));const t0=performance.now();(function f(n){tlUpdate();if(n-t0<650)requestAnimationFrame(f)})(t0)})});
+/* orbit view */
+const orb=document.createElement('div');orb.className='orb';orb.innerHTML='<div class="orb-bg"></div><div class="orb-stage" role="dialog" aria-modal="true" aria-labelledby="orbT"><button class="orb-x" type="button" aria-label="Close">\u00d7</button><svg class="orb-lines" aria-hidden="true"></svg><div class="orb-core"><span class="orb-when"></span><h3 id="orbT"></h3><span class="orb-co"></span></div><div class="orb-tags"></div></div>';document.body.appendChild(orb);
+const oSt=orb.querySelector('.orb-stage'),oSvg=orb.querySelector('.orb-lines'),oX=orb.querySelector('.orb-x');let oLast=null,oT=0;
+function openOrb(j){clearTimeout(oT);oLast=document.activeElement;oSt.querySelectorAll('.orb-n').forEach(n=>n.remove());oSvg.innerHTML='';
+const jn=j.querySelector('.jn'),em=jn.querySelector('em');orb.querySelector('.orb-when').textContent=j.querySelector('.when').textContent;orb.querySelector('#orbT').textContent=jn.firstChild.textContent.replace(/\s*\u00b7\s*$/,'').trim();orb.querySelector('.orb-co').textContent=em?em.textContent:'';
+orb.querySelector('.orb-tags').replaceChildren(...[...j.querySelectorAll('.jd .tag')].map(t=>t.cloneNode(true)));
+const items=[...j.querySelectorAll('.jd li')].map(l=>l.textContent),n=items.length,mob=matchMedia('(max-width:760px)').matches;
+const nodes=items.map((t,i)=>{const d=document.createElement('div');d.className='orb-n';d.style.setProperty('--i',i);d.textContent=t;oSt.appendChild(d);return d});
+document.body.style.overflow='hidden';orb.classList.remove('on');
+const r=oSt.getBoundingClientRect(),W=r.width,H=r.height;
+const pos=items.map((_,i)=>{const a=(-90+i*360/n)*Math.PI/180;return[50+36*Math.cos(a),50+37*Math.sin(a)]});
+if(!mob){oSvg.setAttribute('viewBox','0 0 '+W+' '+H);oSvg.innerHTML=pos.map((p,i)=>'<line pathLength="1" style="--i:'+i+'" x1="'+W/2+'" y1="'+H/2+'" x2="'+W*p[0]/100+'" y2="'+H*p[1]/100+'"/>').join('')}
+oSt.scrollTop=0;requestAnimationFrame(()=>{orb.classList.add('on');if(!mob)nodes.forEach((d,i)=>{d.style.left=pos[i][0]+'%';d.style.top=pos[i][1]+'%'});oX.focus({preventScroll:true})})}
+function closeOrb(){if(!orb.classList.contains('on'))return;orb.classList.remove('on');document.body.style.overflow='';oT=setTimeout(()=>{oSt.querySelectorAll('.orb-n').forEach(n=>n.remove());oSvg.innerHTML=''},450);if(oLast)oLast.focus({preventScroll:true})}
+oX.addEventListener('click',closeOrb);orb.querySelector('.orb-bg').addEventListener('click',closeOrb);oSt.addEventListener('click',e=>{if(e.target===oSt)closeOrb()});addEventListener('keydown',e=>{if(e.key==='Escape')closeOrb()});
+jobs.forEach(j=>{j.classList.remove('open');const b=j.querySelector('.jh');if(b){b.removeAttribute('aria-expanded');b.setAttribute('aria-haspopup','dialog')}j.addEventListener('click',()=>openOrb(j))});
 
 /* copy */
 const btn=document.getElementById('copy');
