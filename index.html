@@ -278,6 +278,41 @@ footer .in{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;pa
 .cert span:hover{transform:translateY(-4px) scale(1.06);border-color:var(--accent2);background:color-mix(in srgb,var(--accent2) 26%,transparent);color:#fff;box-shadow:0 10px 22px -8px var(--accent2)}
 .panel .tag:hover::after,.cert span:hover::after{transform:translateX(120%)}
 .panel .tags:hover .tag:not(:hover),.cert:hover span:not(:hover){opacity:.5}
+
+/* phone: apps + experience */
+.ph-tabs{position:absolute;top:44px;left:14px;right:14px;z-index:6;display:grid;grid-template-columns:1fr 1fr;padding:3px;border-radius:999px;background:rgba(255,255,255,.08)}
+.ph-tabs button{all:unset;position:relative;z-index:1;text-align:center;font:600 11px var(--f-body);color:rgba(255,255,255,.65);padding:6px 0;cursor:pointer;transition:color .3s}
+.ph-tabs button.on{color:#06221F}
+.ph-tabs button:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:999px}
+.ph-tabs i{position:absolute;top:3px;bottom:3px;left:3px;width:calc(50% - 3px);border-radius:999px;background:var(--accent);transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+.ph-tabs.e i{transform:translateX(100%)}
+.ph-slides{position:absolute;inset:0}
+.ps{position:absolute;inset:0;padding:90px 16px 36px;display:flex;flex-direction:column;gap:9px;color:#fff;font-size:11.5px;opacity:0;transition:opacity .6s ease;pointer-events:none}
+.ps.on{opacity:1}
+.ps>*{opacity:0;transform:translateY(10px);transition:opacity .4s,transform .5s cubic-bezier(.2,.8,.2,1)}
+.ps.on>*{opacity:1;transform:none;transition-delay:calc(.15s + var(--k)*70ms)}
+.ps-app{background:radial-gradient(120% 60% at 50% 22%,color-mix(in srgb,var(--g) 42%,#05080D),#05080D 75%)}
+.ps-app img{width:88px;height:88px;border-radius:21px;margin:8px auto 6px;display:block;box-shadow:0 16px 32px -12px var(--g)}
+.ps.on.ps-app img{animation:psPop .7s cubic-bezier(.3,1.5,.5,1) both}
+@keyframes psPop{from{transform:scale(.6) rotate(-8deg);opacity:0}to{transform:none;opacity:1}}
+.ps h4{margin:0;font:600 14px/1.25 var(--f-display)}
+.ps-app h4{text-align:center}
+.ps-st{text-align:center;font:10px var(--f-mono);color:var(--ok)}
+.ps-st.wait{color:var(--wait)}
+.ps p{margin:0;opacity:.8;line-height:1.45;text-align:center}
+.ps-tags{display:flex;flex-wrap:wrap;gap:4px;justify-content:center;margin-top:auto}
+.ps-tags span{font:9.5px var(--f-mono);padding:3px 7px;border-radius:6px;background:rgba(255,255,255,.1)}
+.ps-exp{background:radial-gradient(120% 60% at 50% 15%,color-mix(in srgb,var(--accent) 20%,#05080D),#05080D 75%);padding-top:96px}
+.ps-when{font:10px var(--f-mono);color:var(--accent2)}
+.ps-exp h4{font-size:15px}
+.ps-co{color:var(--accent);font-weight:600;font-size:12px}
+.ps-exp ul{margin:6px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:7px;line-height:1.4}
+.ps-exp li{position:relative;padding:8px 9px 8px 20px;border-radius:10px;background:rgba(255,255,255,.06);opacity:.9}
+.ps-exp li::before{content:"";position:absolute;left:9px;top:13px;width:5px;height:5px;border-radius:50%;background:var(--accent)}
+.ps-exp .ps-tags{justify-content:flex-start}
+.dots{gap:4px}
+.dots i{width:5px;height:5px;cursor:pointer}
+.dots i.on{width:14px}
 </style>
 </head>
 <body>
@@ -311,35 +346,9 @@ footer .in{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;pa
       <div class="phone" id="phone">
         <div class="screen">
           <div class="notch"></div>
-          <div class="sc s-lumora on">
-            <div><div class="s">Lumora</div><div class="t">AI Makeup Studio</div></div>
-            <div class="face"></div>
-            <div class="chips"><span class="a">Glam</span><span>Natural</span><span>Bold</span><span>Soft</span></div>
-            <div class="s" style="text-align:center">Before · After</div>
-          </div>
-          <div class="sc s-weather">
-            <div><div class="s">Oujda · Now</div><div class="temp">24°</div><div class="s">Clear sky · H 27° L 16°</div></div>
-            <div class="radar"></div>
-            <div class="days"><span>Sat 26°</span><span>Sun 23°</span><span>Mon 21°</span><span>Tue 25°</span></div>
-          </div>
-          <div class="sc s-bills">
-            <div><div class="s">Monthly Charges</div><div class="t">October</div></div>
-            <div class="total"><span class="s">Total this month</span><b>€ 184.50</b></div>
-            <div class="row"><span>Rent share</span><span>€ 95.00</span></div>
-            <div class="row"><span>Internet</span><span><em>in 2 days</em> € 29.00</span></div>
-            <div class="row"><span>Streaming</span><span>€ 12.99</span></div>
-            <div class="row"><span>Gym</span><span>€ 30.00</span></div>
-          </div>
-          <div class="sc s-piano">
-            <div style="display:flex;justify-content:space-between;align-items:end"><div><div class="s">Piano Rhythm</div><div class="t">Combo ×24</div></div><div class="t" style="color:#F4B65C">12 480</div></div>
-            <div class="lanes"><div class="lane"><i></i></div><div class="lane"><i></i></div><div class="lane"><i></i></div><div class="lane"><i></i></div><div class="hit"></div></div>
-          </div>
-          <div class="sc s-wardrobe">
-            <div><div class="s">Wardrobe AI</div><div class="t">Today's outfit</div></div>
-            <div class="closet"><span style="background:#E9DCC7"></span><span style="background:#2F3A4F"></span><span style="background:#B5835A"></span><span style="background:#F3F0EA"></span><span style="background:#556B4E"></span><span style="background:#1E1E22"></span></div>
-            <div class="pick">✦ Suggested: <b>beige shirt, navy chinos, brown loafers</b> for a 24° evening.</div>
-          </div>
-          <div class="dots"><i class="on"></i><i></i><i></i><i></i><i></i></div>
+          <div class="ph-tabs"><button type="button" data-g="a">Apps</button><button type="button" data-g="e">Experience</button><i></i></div>
+          <div class="ph-slides"></div>
+          <div class="dots"></div>
         </div>
       </div>
     </div>
@@ -479,9 +488,21 @@ const phone=document.getElementById('phone');
 if(!reduce&&matchMedia('(min-width:861px)').matches){hero.addEventListener('pointermove',e=>{const x=e.clientX/innerWidth-.5,y=e.clientY/innerHeight-.5;phone.style.transform=`rotateY(${-14+x*16}deg) rotateX(${6-y*12}deg)`})}
 
 /* phone screens */
-const scs=[...document.querySelectorAll('.sc')],dts=[...document.querySelectorAll('.dots i')];let si=0;
-function show(i){scs[si].classList.remove('on');dts[si].classList.remove('on');si=i;scs[si].classList.add('on');dts[si].classList.add('on')}
-setInterval(()=>show((si+1)%scs.length),reduce?6000:3400);
+const phSl=document.querySelector('.ph-slides'),phD=document.querySelector('.dots'),phT=document.querySelector('.ph-tabs'),slides=[];
+const mk=(tag,txt)=>{const e=document.createElement(tag);e.textContent=txt;return e};
+document.querySelectorAll('.app').forEach(a=>{const img=a.querySelector('img.icon');if(!img)return;const s=document.createElement('div');s.className='ps ps-app';s.dataset.g='a';s.style.setProperty('--g',a.style.getPropertyValue('--glow').trim()||'#3FD3C6');
+const st=a.querySelector('.status'),im=document.createElement('img');im.src=img.src;im.alt='';const sp=mk('div',st.textContent);sp.className='ps-st'+(st.classList.contains('wait')?' wait':'');const tg=document.createElement('div');tg.className='ps-tags';tg.append(...[...a.querySelectorAll('.tag')].map(t=>mk('span',t.textContent)));
+s.append(im,mk('h4',a.querySelector('h3').textContent),sp,mk('p',a.querySelector('p').textContent),tg);slides.push(s)});
+const jl=[...document.querySelectorAll('.job')];jl.forEach((j,k)=>{const s=document.createElement('div');s.className='ps ps-exp';s.dataset.g='e';const jn=j.querySelector('.jn'),em=jn.querySelector('em');
+const w=mk('div',j.querySelector('.when').textContent+'  ·  '+(k+1)+'/'+jl.length);w.className='ps-when';const co=mk('div',em?em.textContent:'Independent');co.className='ps-co';const ul=document.createElement('ul');ul.append(...[...j.querySelectorAll('.jd li')].slice(0,3).map(l=>mk('li',l.textContent)));const tg=document.createElement('div');tg.className='ps-tags';tg.append(...[...j.querySelectorAll('.jd .tag')].slice(0,4).map(t=>mk('span',t.textContent)));
+s.append(w,mk('h4',jn.firstChild.textContent.replace(/\s*·\s*$/,'').trim()),co,ul,tg);slides.push(s)});
+slides.forEach(s=>{[...s.children].forEach((c,k)=>c.style.setProperty('--k',k));phSl.appendChild(s);phD.appendChild(document.createElement('i'))});
+const dts=[...phD.children];let si=0,phTimer;
+function show(i){slides[si].classList.remove('on');dts[si].classList.remove('on');si=i;slides[si].classList.add('on');dts[si].classList.add('on');const g=slides[si].dataset.g;phT.classList.toggle('e',g==='e');phT.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.g===g))}
+function phAuto(){clearInterval(phTimer);phTimer=setInterval(()=>show((si+1)%slides.length),reduce?6500:3800)}
+phT.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{const i=slides.findIndex(s=>s.dataset.g===b.dataset.g);if(i>=0){show(i);phAuto()}}));
+dts.forEach((d,i)=>d.addEventListener('click',()=>{show(i);phAuto()}));
+if(slides.length){show(0);phAuto()}
 
 /* typer */
 const words=['mobile apps with React Native','web platforms with React & .NET','AI-powered features','APIs and cloud backends','apps that reach the App Store'];
